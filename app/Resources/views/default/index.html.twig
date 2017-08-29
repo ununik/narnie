@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Prihlášky - Narnie
+{% endblock %}
+
+{% block body %}
+    <h1>Test</h1>
+    <form>
+        <h2>Rodic</h2>
+        <div>
+            <label for="firstname">Jmeno</label>
+            <input type="text" name="firstname" id="firstname">
+        </div>
+        <div>
+            <label for="last">Prijmeni</label>
+            <input type="text" name="last" id="last">
+        </div>
+        <div>
+            <label for="tel">Telefon</label>
+            <input type="text" name="tel" id="tel">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email">
+        </div>
+
+        <h2>Deti</h2>
+
+        <div id="deti">
+        </div>
+        <div id="deti_pridat_button">Pridat dite</div>
+    </form>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+</style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $( "#deti_pridat_button" ).click(function() {
+            var child_count = $ ( '.dite' ).length + 1;
+            var dite_html = '<div class="dite">'     +
+                '<label>Jmeno</label><input type="text" name="child[\'firstname\'][]">' +
+                '<label>Prijmeni</label><input type="text" name="child[\'lastname\'][]">' +
+                '<label>Rok narozeni</label><input type="number" min="1980" max="2017" name="child[\'year\'][]">' +
+                '<div onclick=\"remove_child(this)\">Odstranit</div>' +
+                '</div>';
+            $( "#deti" ).append(dite_html);
+        });
+
+        function remove_child (button) {
+           $(button).parent().remove();
+        }
+    </script>
+{% endblock %}
